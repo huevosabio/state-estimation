@@ -1,0 +1,826 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{hw3}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{AA 273: Homework 3}\label{aa-273-homework-3}
+
+Ramon Iglesias
+
+    \subsection{Q1}\label{q1}
+
+\textbf{1.a)}
+
+First, not that \(x,y\) are statistically independent of \(w\).
+
+\[
+p(x,y,w) = p(x,y | w) p(w)
+\]
+
+But, from the problem statement,
+
+\[ 
+p(x,w,y) = p(x,y) p(w)
+\]
+
+thus, \[
+p(x,y | w)  = p(x,y).
+\]
+
+Now, we compute the covariance by leveraging this property:
+
+\begin{align}
+cov(X,W | Y)  & = E[XW | Y] - E[X | Y] E[W|Y] &\\
+ &= E[XW | Y] - \mu_{X|Y} \mu_{W} & \text{(by conditional independence)}\\
+ &= E_{W | Y}[E_{XW | W,Y}[XW | W,Y] ] - \mu_{X|Y} \mu_{W}  & \text{(by law of total expectation)}\\
+ &= E_{W | Y}[W E_{X | W,Y}[X | W,Y] ] - \mu_{X|Y} \mu_{W}& \\
+ &= E_{W | Y}[W E_{X | Y}[X | Y] ] - \mu_{X|Y} \mu_{W} & \text{(by conditional independence)}\\
+ &= E_{W | Y}[W \mu_{X|Y}] - \mu_{X|Y} \mu_{W} &\\
+ &= E_{W}[W] \mu_{X|Y} - \mu_{X|Y} \mu_{W}  & \text{(by conditional independence)}\\
+ &= \mu_{W} \mu_{X|Y} - \mu_{X|Y} \mu_{W} = 0 &\\
+ \end{align}
+
+    \textbf{1.b)}
+
+\begin{align}
+E[(X - \mu_{t|t}) W^T | Y] & = E[XW^T | Y] - E[\mu_{t|t} W^T | Y]\\
+&= E[XW^T | Y] - \mu_{t|t} \mu_{W}^T \\
+&= E_{W|Y} [ E_{XW | Y}[ XW^T | Y] ] - \mu_{t|t} \mu_{W}^T \\
+&= E_{W|Y} [ E_{X | Y}[ X | Y] W^T ] - \mu_{t|t} \mu_{W}^T \\
+&= E_{W|Y} [ \mu_{X|Y} W^T ] - \mu_{t|t} \mu_{W}^T \\
+&= \mu_{X|Y} \mu_{W}^T  - \mu_{t|t} \mu_{W}^T \\
+&= \mu_{t|t} \mu_{W}^T  - \mu_{t|t} \mu_{W}^T = 0 \\
+\end{align}
+
+where for convenience we abbreviate \(X := X_{t}\), and \(Y := Y_{1:t}\)
+
+    \subsection{Q2}\label{q2}
+
+    \textbf{2.a)} Find the system matrices \(A,B,C\).
+
+    The system can be summarized as follows:
+
+\[
+x_{t+1} = A x_{t} + B u_{t} + w_t\,, \\
+y_{t+1} = C x_{t} + v_t\,,
+\]
+
+where
+
+\[
+x_t = 
+\begin{bmatrix}
+    p_{1,t} \\
+    p_{2,t} \\
+    s_{1,t} \\
+    s_{2,t} \\
+\end{bmatrix}\,,
+\]
+
+\[
+u_t = 
+\begin{bmatrix}
+    u_{1,t} \\
+    u_{2,t} \\
+\end{bmatrix}\,,
+\]
+
+\[
+A = 
+\begin{bmatrix}
+    1 & 0 & \delta t  & 0 \\
+    0 & 1 & 0  & \delta t \\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0  & 1
+\end{bmatrix}
+\]
+
+\[
+B = 
+\begin{bmatrix}
+    0 & 0 \\
+    0 & 0 \\
+    \delta t & 0 \\
+    0 & \delta t
+\end{bmatrix}
+\]
+
+\[
+Q =
+\begin{bmatrix}
+    0 & 0 & 0  & 0 \\
+    0 & 0 & 0  & 0 \\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0  & 1
+\end{bmatrix}\,.
+\]
+
+\[
+C = 
+\begin{bmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & 1 & 0 & 0
+\end{bmatrix}
+\]
+
+    \textbf{2.b)} Simulate trajectory
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}127}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+          \PY{k+kn}{import} \PY{n+nn}{matplotlib.pyplot} \PY{k+kn}{as} \PY{n+nn}{plt}
+          \PY{k+kn}{from} \PY{n+nn}{scipy.stats} \PY{k+kn}{import} \PY{n}{multivariate\PYZus{}normal}
+          \PY{k+kn}{from} \PY{n+nn}{matplotlib.patches} \PY{k+kn}{import} \PY{n}{Ellipse}
+          \PY{o}{\PYZpc{}} \PY{n}{matplotlib} \PY{n}{inline}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}107}]:} \PY{k}{def} \PY{n+nf}{gen\PYZus{}noise}\PY{p}{(}\PY{n}{size}\PY{p}{,} \PY{n}{cov}\PY{p}{)}\PY{p}{:}
+              \PY{n}{mean} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{size}\PY{p}{)}
+              \PY{k}{return} \PY{n}{multivariate\PYZus{}normal}\PY{o}{.}\PY{n}{rvs}\PY{p}{(}\PY{n}{mean} \PY{o}{=} \PY{n}{mean}\PY{p}{,} \PY{n}{cov} \PY{o}{=} \PY{n}{cov}\PY{p}{)}
+          
+          \PY{k}{class} \PY{n+nc}{LTISystem}\PY{p}{:}
+              \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{A}\PY{p}{,} \PY{n}{B}\PY{p}{,} \PY{n}{C}\PY{p}{,} \PY{n}{D}\PY{p}{,} \PY{n}{Q}\PY{p}{,} \PY{n}{R}\PY{p}{,} \PY{n}{x\PYZus{}0}\PY{p}{,} \PY{n}{control\PYZus{}func}\PY{p}{,} \PY{n}{t\PYZus{}0}\PY{p}{,} \PY{n}{dt}\PY{p}{)}\PY{p}{:}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{A} \PY{o}{=} \PY{n}{A}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{B} \PY{o}{=} \PY{n}{B}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{C} \PY{o}{=} \PY{n}{C}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{D} \PY{o}{=} \PY{n}{D}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{Q} \PY{o}{=} \PY{n}{Q}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{R} \PY{o}{=} \PY{n}{R}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x} \PY{o}{=} \PY{n}{x\PYZus{}0}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{control\PYZus{}func} \PY{o}{=} \PY{n}{control\PYZus{}func}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t} \PY{o}{=} \PY{n}{t\PYZus{}0}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt} \PY{o}{=} \PY{n}{dt}
+                  \PY{k}{return}
+              
+              \PY{k}{def} \PY{n+nf}{forward\PYZus{}step}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{w} \PY{o}{=} \PY{n}{gen\PYZus{}noise}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{Q}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{Q}\PY{p}{)}
+                  \PY{n}{u} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{control\PYZus{}func}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{p}{)}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{A}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{)} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{B}\PY{p}{,} \PY{n}{u}\PY{p}{)} \PY{o}{+} \PY{n}{w}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t} \PY{o}{+}\PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                  \PY{n}{y} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{get\PYZus{}measurement}\PY{p}{(}\PY{n}{u}\PY{p}{)}
+                  \PY{k}{return} \PY{n}{u}\PY{p}{,} \PY{n}{y}
+              
+              \PY{k}{def} \PY{n+nf}{get\PYZus{}measurement}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{u}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{C}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{)} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{D}\PY{p}{,} \PY{n}{u}\PY{p}{)}
+                  \PY{n}{v} \PY{o}{=} \PY{n}{gen\PYZus{}noise}\PY{p}{(}\PY{n}{y}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{R}\PY{p}{)}
+                  \PY{k}{return} \PY{n}{y} \PY{o}{+} \PY{n}{v}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}421}]:} \PY{n}{dt} \PY{o}{=} \PY{l+m+mf}{1.}
+          \PY{n}{t\PYZus{}0} \PY{o}{=} \PY{l+m+mf}{0.}
+          \PY{n}{x\PYZus{}0} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}
+              \PY{l+m+mf}{1000.}\PY{p}{,}
+              \PY{l+m+mf}{0.}\PY{p}{,}
+              \PY{l+m+mf}{0.}\PY{p}{,}
+              \PY{l+m+mf}{50.}
+          \PY{p}{]}\PY{p}{)}
+          
+          \PY{k}{def} \PY{n+nf}{get\PYZus{}action}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{t}\PY{p}{)}\PY{p}{:}
+              \PY{k}{return} \PY{o}{\PYZhy{}}\PY{l+m+mf}{2.5} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{l+m+mf}{0.05} \PY{o}{*} \PY{n}{t}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{l+m+mf}{0.05} \PY{o}{*} \PY{n}{t}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+          
+          \PY{n}{A} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}
+              \PY{p}{[}\PY{l+m+mf}{1.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{,} \PY{n}{dt}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{]}\PY{p}{,}
+              \PY{p}{[}\PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{1.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{,} \PY{n}{dt}\PY{p}{]}\PY{p}{,}
+              \PY{p}{[}\PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{1.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{]}\PY{p}{,}
+              \PY{p}{[}\PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{1.}\PY{p}{]}
+          \PY{p}{]}\PY{p}{)}
+          
+          
+          \PY{n}{B} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}
+              \PY{p}{[}\PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{]}\PY{p}{,}
+              \PY{p}{[}\PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{]}\PY{p}{,}
+              \PY{p}{[}\PY{n}{dt}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{]}\PY{p}{,}
+              \PY{p}{[}\PY{l+m+mf}{0.}\PY{p}{,} \PY{n}{dt}\PY{p}{]}
+          \PY{p}{]}\PY{p}{)}
+          
+          \PY{n}{C} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}
+              \PY{p}{[}\PY{l+m+mf}{1.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{]}\PY{p}{,}
+              \PY{p}{[}\PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{1.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{]}
+          \PY{p}{]}\PY{p}{)}
+          
+          \PY{n}{Q} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}
+              \PY{p}{[}\PY{l+m+mf}{0.}\PY{p}{,}\PY{l+m+mf}{0.}\PY{p}{,}\PY{l+m+mf}{0.}\PY{p}{,}\PY{l+m+mf}{0.}\PY{p}{]}\PY{p}{,}
+              \PY{p}{[}\PY{l+m+mf}{0.}\PY{p}{,}\PY{l+m+mf}{0.}\PY{p}{,}\PY{l+m+mf}{0.}\PY{p}{,}\PY{l+m+mf}{0.}\PY{p}{]}\PY{p}{,}
+              \PY{p}{[}\PY{l+m+mf}{0.}\PY{p}{,}\PY{l+m+mf}{0.}\PY{p}{,}\PY{l+m+mf}{1.}\PY{p}{,}\PY{l+m+mf}{0.}\PY{p}{]}\PY{p}{,}
+              \PY{p}{[}\PY{l+m+mf}{0.}\PY{p}{,}\PY{l+m+mf}{0.}\PY{p}{,}\PY{l+m+mf}{0.}\PY{p}{,}\PY{l+m+mf}{1.}\PY{p}{]}
+          \PY{p}{]}\PY{p}{)}
+          
+          \PY{n}{R} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}
+              \PY{p}{[}\PY{l+m+mf}{9.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{]}\PY{p}{,}
+              \PY{p}{[}\PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{9.}\PY{p}{]}
+          \PY{p}{]}\PY{p}{)}
+          
+          \PY{n}{D} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{nsteps} \PY{o}{=} \PY{l+m+mi}{100}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}422}]:} \PY{n}{system} \PY{o}{=} \PY{n}{LTISystem}\PY{p}{(}\PY{n}{A}\PY{p}{,} \PY{n}{B}\PY{p}{,} \PY{n}{C}\PY{p}{,} \PY{n}{D}\PY{p}{,} \PY{n}{Q}\PY{p}{,} \PY{n}{R}\PY{p}{,} \PY{n}{x\PYZus{}0}\PY{p}{,} \PY{n}{get\PYZus{}action}\PY{p}{,} \PY{n}{t\PYZus{}0}\PY{p}{,} \PY{n}{dt}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}423}]:} \PY{n}{measurements} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{nsteps}\PY{p}{,} \PY{n}{C}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+          \PY{n}{real\PYZus{}trajectory} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{nsteps}\PY{p}{,} \PY{n}{C}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{nsteps}\PY{p}{)}\PY{p}{:}
+              \PY{n}{u}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{system}\PY{o}{.}\PY{n}{forward\PYZus{}step}\PY{p}{(}\PY{p}{)}
+              \PY{n}{measurements}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{y}
+              \PY{n}{real\PYZus{}trajectory}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{system}\PY{o}{.}\PY{n}{x}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}424}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{real\PYZus{}trajectory}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+                   \PY{n}{real\PYZus{}trajectory}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} 
+                   \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Real Trajecory}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{measurements}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+                      \PY{n}{measurements}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} 
+                      \PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                      \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{orange}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                      \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Measurements}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}424}]:} <matplotlib.legend.Legend at 0x10bd0fa90>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_12_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Q3}\label{q3}
+
+    \textbf{3.a)} The new equations remain unchanged, the only difference is
+how we model the noise in \(w_t\). That is,
+
+\[
+w_t \sim \mathcal{N}(\mu_w,\,Q)\,,
+\]
+
+where \(\mu_t\) is zero everywhere, and
+
+\[
+Q =
+\begin{bmatrix}
+    0 & 0 & 0  & 0 \\
+    0 & 0 & 0  & 0 \\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0  & 1
+\end{bmatrix}\,.
+\]
+
+In other words, \(w_t\) has zero mean and zero variance (i.e. always
+zero) in the position variables.
+
+    \textbf{3.b)}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}425}]:} \PY{k}{class} \PY{n+nc}{KalmanFilter}\PY{p}{:}
+              \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{lti\PYZus{}system}\PY{p}{,} \PY{n}{mu\PYZus{}0}\PY{p}{,} \PY{n}{sigma\PYZus{}0}\PY{p}{)}\PY{p}{:}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{A} \PY{o}{=} \PY{n}{lti\PYZus{}system}\PY{o}{.}\PY{n}{A}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{B} \PY{o}{=} \PY{n}{lti\PYZus{}system}\PY{o}{.}\PY{n}{B}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{C} \PY{o}{=} \PY{n}{lti\PYZus{}system}\PY{o}{.}\PY{n}{C}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{Q} \PY{o}{=} \PY{n}{lti\PYZus{}system}\PY{o}{.}\PY{n}{Q}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{R} \PY{o}{=} \PY{n}{lti\PYZus{}system}\PY{o}{.}\PY{n}{R}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{D} \PY{o}{=} \PY{n}{lti\PYZus{}system}\PY{o}{.}\PY{n}{D}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{mu} \PY{o}{=} \PY{n}{mu\PYZus{}0}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{sigma} \PY{o}{=} \PY{n}{sigma\PYZus{}0}
+                  \PY{k}{return}
+              
+              \PY{k}{def} \PY{n+nf}{predict}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{u}\PY{p}{)}\PY{p}{:}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{mu} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{A}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{mu}\PY{p}{)} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{B}\PY{p}{,} \PY{n}{u}\PY{p}{)}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{sigma} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{A}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{sigma}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{A}\PY{o}{.}\PY{n}{T}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{Q}
+                  \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{mu}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{sigma}
+              
+              \PY{k}{def} \PY{n+nf}{update}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{y}\PY{p}{,}\PY{n}{u}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{term3} \PY{o}{=} \PY{n}{y} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{C}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{mu}\PY{p}{)} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{D}\PY{p}{,} \PY{n}{u}\PY{p}{)}\PY{p}{)}
+                  \PY{n}{term2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{C}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{sigma}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{C}\PY{o}{.}\PY{n}{T}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{R}\PY{p}{)}
+                  \PY{n}{term1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{sigma}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{C}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+                  \PY{n}{term4} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{C}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{sigma}\PY{p}{)}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{mu} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{mu} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{term1}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{term2}\PY{p}{,} \PY{n}{term3}\PY{p}{)}\PY{p}{)}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{sigma} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{sigma} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{term1}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{term2}\PY{p}{,} \PY{n}{term4}\PY{p}{)}\PY{p}{)}
+                  \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{mu}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{sigma}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}427}]:} \PY{k}{def} \PY{n+nf}{plot\PYZus{}cov\PYZus{}ellipse}\PY{p}{(}\PY{n}{cov}\PY{p}{,} \PY{n}{pos}\PY{p}{,} \PY{n}{nstd}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n+nb+bp}{None}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{kwargs}\PY{p}{)}\PY{p}{:}
+              \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+          \PY{l+s+sd}{    Plots an `nstd` sigma error ellipse based on the specified covariance}
+          \PY{l+s+sd}{    matrix (`cov`). Additional keyword arguments are passed on to the }
+          \PY{l+s+sd}{    ellipse patch artist.}
+          
+          \PY{l+s+sd}{    Parameters}
+          \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+          \PY{l+s+sd}{        cov : The 2x2 covariance matrix to base the ellipse on}
+          \PY{l+s+sd}{        pos : The location of the center of the ellipse. Expects a 2\PYZhy{}element}
+          \PY{l+s+sd}{            sequence of [x0, y0].}
+          \PY{l+s+sd}{        nstd : The radius of the ellipse in numbers of standard deviations.}
+          \PY{l+s+sd}{            Defaults to 2 standard deviations.}
+          \PY{l+s+sd}{        ax : The axis that the ellipse will be plotted on. Defaults to the }
+          \PY{l+s+sd}{            current axis.}
+          \PY{l+s+sd}{        Additional keyword arguments are pass on to the ellipse patch.}
+          
+          \PY{l+s+sd}{    Returns}
+          \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+          \PY{l+s+sd}{        A matplotlib ellipse artist}
+          \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+              \PY{k}{def} \PY{n+nf}{eigsorted}\PY{p}{(}\PY{n}{cov}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{vals}\PY{p}{,} \PY{n}{vecs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{eigh}\PY{p}{(}\PY{n}{cov}\PY{p}{)}
+                  \PY{n}{order} \PY{o}{=} \PY{n}{vals}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+                  \PY{k}{return} \PY{n}{vals}\PY{p}{[}\PY{n}{order}\PY{p}{]}\PY{p}{,} \PY{n}{vecs}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{order}\PY{p}{]}
+          
+              \PY{k}{if} \PY{n}{ax} \PY{o+ow}{is} \PY{n+nb+bp}{None}\PY{p}{:}
+                  \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{gca}\PY{p}{(}\PY{p}{)}
+          
+              \PY{n}{vals}\PY{p}{,} \PY{n}{vecs} \PY{o}{=} \PY{n}{eigsorted}\PY{p}{(}\PY{n}{cov}\PY{p}{)}
+              \PY{n}{theta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{degrees}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arctan2}\PY{p}{(}\PY{o}{*}\PY{n}{vecs}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+          
+              \PY{c+c1}{\PYZsh{} Width and height are \PYZdq{}full\PYZdq{} widths, not radius}
+              \PY{n}{width}\PY{p}{,} \PY{n}{height} \PY{o}{=} \PY{l+m+mi}{2} \PY{o}{*} \PY{n}{nstd} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{vals}\PY{p}{)}
+              \PY{n}{ellip} \PY{o}{=} \PY{n}{Ellipse}\PY{p}{(}\PY{n}{xy}\PY{o}{=}\PY{n}{pos}\PY{p}{,} \PY{n}{width}\PY{o}{=}\PY{n}{width}\PY{p}{,} \PY{n}{height}\PY{o}{=}\PY{n}{height}\PY{p}{,} \PY{n}{angle}\PY{o}{=}\PY{n}{theta}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{kwargs}\PY{p}{)}
+          
+              \PY{n}{ax}\PY{o}{.}\PY{n}{add\PYZus{}artist}\PY{p}{(}\PY{n}{ellip}\PY{p}{)}
+              \PY{k}{return} \PY{n}{ellip}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}468}]:} \PY{n}{system} \PY{o}{=} \PY{n}{LTISystem}\PY{p}{(}\PY{n}{A}\PY{p}{,} \PY{n}{B}\PY{p}{,} \PY{n}{C}\PY{p}{,} \PY{n}{D}\PY{p}{,} \PY{n}{Q}\PY{p}{,} \PY{n}{R}\PY{p}{,} \PY{n}{x\PYZus{}0}\PY{p}{,} \PY{n}{get\PYZus{}action}\PY{p}{,} \PY{n}{t\PYZus{}0}\PY{p}{,} \PY{n}{dt}\PY{p}{)}
+          \PY{n}{mu\PYZus{}0} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}
+              \PY{l+m+mf}{1500.}\PY{p}{,}
+              \PY{l+m+mf}{100.}\PY{p}{,}
+              \PY{l+m+mf}{0.}\PY{p}{,}
+              \PY{l+m+mf}{55.}
+          \PY{p}{]}\PY{p}{)}
+          
+          \PY{n}{sigma\PYZus{}0} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}
+              \PY{p}{[}\PY{l+m+mf}{250000.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{]}\PY{p}{,}
+              \PY{p}{[}\PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{250000.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{]}\PY{p}{,}
+              \PY{p}{[}\PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{1.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{]}\PY{p}{,}
+              \PY{p}{[}\PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{1.}\PY{p}{]}\PY{p}{,}
+          \PY{p}{]}\PY{p}{)}
+          
+          \PY{n}{kfilter} \PY{o}{=} \PY{n}{KalmanFilter}\PY{p}{(}\PY{n}{system}\PY{p}{,} \PY{n}{mu\PYZus{}0}\PY{p}{,} \PY{n}{sigma\PYZus{}0}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}469}]:} \PY{n}{measurements} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{nsteps}\PY{p}{,} \PY{n}{C}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+          \PY{n}{real\PYZus{}trajectory} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{nsteps}\PY{p}{,} \PY{n}{x\PYZus{}0}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+          \PY{n}{mus} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{nsteps}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{x\PYZus{}0}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+          \PY{n}{sigmas} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{nsteps}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{x\PYZus{}0}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{x\PYZus{}0}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+          \PY{n}{mus}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{mu\PYZus{}0}
+          \PY{n}{sigmas}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{sigma\PYZus{}0}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{nsteps}\PY{p}{)}\PY{p}{:}
+              \PY{n}{u}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{system}\PY{o}{.}\PY{n}{forward\PYZus{}step}\PY{p}{(}\PY{p}{)}
+              \PY{n}{measurements}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{y}
+              \PY{n}{real\PYZus{}trajectory}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{system}\PY{o}{.}\PY{n}{x}
+              \PY{n}{mu}\PY{p}{,} \PY{n}{sigma} \PY{o}{=} \PY{n}{kfilter}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{u}\PY{p}{)}
+              \PY{n}{mu}\PY{p}{,} \PY{n}{sigma} \PY{o}{=} \PY{n}{kfilter}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{u}\PY{p}{)}
+              \PY{n}{mus}\PY{p}{[}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,} \PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{mu}
+              \PY{n}{sigmas}\PY{p}{[}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,} \PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{sigma}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}470}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{real\PYZus{}trajectory}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+                   \PY{n}{real\PYZus{}trajectory}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} 
+                   \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Real Trajecory}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.9}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{mus}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+                      \PY{n}{mus}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} 
+                      \PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                      \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                      \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Expected Trajectory}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{)}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{nsteps}\PY{p}{)}\PY{p}{:}
+              \PY{c+c1}{\PYZsh{}plot\PYZus{}ellipsis(mus[i,:2,None], sigmas[i,:2,:2], P = 0.95, color = \PYZsq{}orange\PYZsq{}, alpha=0.1)}
+              \PY{n}{plot\PYZus{}cov\PYZus{}ellipse}\PY{p}{(}\PY{n}{sigmas}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{mus}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{orange}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.5}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}470}]:} <matplotlib.legend.Legend at 0x10de48f90>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \textbf{3.c)} Velocity trajectory
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}474}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{real\PYZus{}trajectory}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}
+                   \PY{n}{real\PYZus{}trajectory}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,} 
+                   \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Real Trajecory}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.9}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{mus}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}
+                      \PY{n}{mus}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,} 
+                      \PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                      \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                      \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Expected Trajectory}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{nsteps}\PY{p}{)}\PY{p}{:}
+              \PY{c+c1}{\PYZsh{}plot\PYZus{}ellipsis(mus[i,:2,None], sigmas[i,:2,:2], P = 0.95, color = \PYZsq{}orange\PYZsq{}, alpha=0.1)}
+              \PY{n}{plot\PYZus{}cov\PYZus{}ellipse}\PY{p}{(}\PY{n}{sigmas}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{mus}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{orange}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.3}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}474}]:} <matplotlib.legend.Legend at 0x10e3c1590>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_22_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Q4}\label{q4}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}449}]:} \PY{n}{C4} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}
+              \PY{p}{[}\PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{1.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{]}\PY{p}{,}
+              \PY{p}{[}\PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{1.}\PY{p}{]}
+          \PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}476}]:} \PY{n}{system} \PY{o}{=} \PY{n}{LTISystem}\PY{p}{(}\PY{n}{A}\PY{p}{,} \PY{n}{B}\PY{p}{,} \PY{n}{C4}\PY{p}{,} \PY{n}{D}\PY{p}{,} \PY{n}{Q}\PY{p}{,} \PY{n}{R}\PY{p}{,} \PY{n}{x\PYZus{}0}\PY{p}{,} \PY{n}{get\PYZus{}action}\PY{p}{,} \PY{n}{t\PYZus{}0}\PY{p}{,} \PY{n}{dt}\PY{p}{)}
+          \PY{n}{mu\PYZus{}0} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}
+              \PY{l+m+mf}{1000.}\PY{p}{,}
+              \PY{l+m+mf}{0.}\PY{p}{,}
+              \PY{l+m+mf}{0.}\PY{p}{,}
+              \PY{l+m+mf}{50.}
+          \PY{p}{]}\PY{p}{)}
+          
+          \PY{n}{sigma\PYZus{}0} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}
+              \PY{p}{[}\PY{l+m+mf}{1.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{]}\PY{p}{,}
+              \PY{p}{[}\PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{1.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{]}\PY{p}{,}
+              \PY{p}{[}\PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{1.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{]}\PY{p}{,}
+              \PY{p}{[}\PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{1.}\PY{p}{]}\PY{p}{,}
+          \PY{p}{]}\PY{p}{)}
+          
+          \PY{n}{kfilter} \PY{o}{=} \PY{n}{KalmanFilter}\PY{p}{(}\PY{n}{system}\PY{p}{,} \PY{n}{mu\PYZus{}0}\PY{p}{,} \PY{n}{sigma\PYZus{}0}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}477}]:} \PY{n}{measurements} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{nsteps}\PY{p}{,} \PY{n}{C}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+          \PY{n}{real\PYZus{}trajectory} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{nsteps}\PY{p}{,} \PY{n}{x\PYZus{}0}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+          \PY{n}{mus} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{nsteps}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{x\PYZus{}0}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+          \PY{n}{sigmas} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{nsteps}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{x\PYZus{}0}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{x\PYZus{}0}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+          \PY{n}{mus}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{mu\PYZus{}0}
+          \PY{n}{sigmas}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{sigma\PYZus{}0}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{nsteps}\PY{p}{)}\PY{p}{:}
+              \PY{n}{u}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{system}\PY{o}{.}\PY{n}{forward\PYZus{}step}\PY{p}{(}\PY{p}{)}
+              \PY{n}{measurements}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{y}
+              \PY{n}{real\PYZus{}trajectory}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{system}\PY{o}{.}\PY{n}{x}
+              \PY{n}{mu}\PY{p}{,} \PY{n}{sigma} \PY{o}{=} \PY{n}{kfilter}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{u}\PY{p}{)}
+              \PY{n}{mu}\PY{p}{,} \PY{n}{sigma} \PY{o}{=} \PY{n}{kfilter}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{u}\PY{p}{)}
+              \PY{n}{mus}\PY{p}{[}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,} \PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{mu}
+              \PY{n}{sigmas}\PY{p}{[}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,} \PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{sigma}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}478}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{real\PYZus{}trajectory}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+                   \PY{n}{real\PYZus{}trajectory}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} 
+                   \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Real Trajecory}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.9}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{mus}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+                      \PY{n}{mus}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} 
+                      \PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                      \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                      \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Expected Trajectory}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.5}\PY{p}{)}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{nsteps}\PY{p}{)}\PY{p}{:}
+              \PY{c+c1}{\PYZsh{}plot\PYZus{}ellipsis(mus[i,:2,None], sigmas[i,:2,:2], P = 0.95, color = \PYZsq{}orange\PYZsq{}, alpha=0.1)}
+              \PY{n}{plot\PYZus{}cov\PYZus{}ellipse}\PY{p}{(}\PY{n}{sigmas}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{mus}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{orange}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.3}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}478}]:} <matplotlib.legend.Legend at 0x10e6c4990>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}479}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{real\PYZus{}trajectory}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}
+                   \PY{n}{real\PYZus{}trajectory}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,} 
+                   \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Real Trajecory}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.9}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{mus}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}
+                      \PY{n}{mus}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,} 
+                      \PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                      \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                      \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Expected Trajectory}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{nsteps}\PY{p}{)}\PY{p}{:}
+              \PY{c+c1}{\PYZsh{}plot\PYZus{}ellipsis(mus[i,:2,None], sigmas[i,:2,:2], P = 0.95, color = \PYZsq{}orange\PYZsq{}, alpha=0.1)}
+              \PY{n}{plot\PYZus{}cov\PYZus{}ellipse}\PY{p}{(}\PY{n}{sigmas}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{mus}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{orange}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.3}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}479}]:} <matplotlib.legend.Legend at 0x10e81ad90>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

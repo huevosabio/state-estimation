@@ -1,0 +1,61 @@
+\begin{thebibliography}{10}
+
+\bibitem{krizhevsky2012imagenet}
+Alex Krizhevsky, Ilya Sutskever, and Geoffrey~E Hinton.
+\newblock Imagenet classification with deep convolutional neural networks.
+\newblock In {\em Advances in neural information processing systems}, pages
+  1097--1105, 2012.
+
+\bibitem{mnih2015human}
+Volodymyr Mnih, Koray Kavukcuoglu, David Silver, Andrei~A Rusu, Joel Veness,
+  Marc~G Bellemare, Alex Graves, Martin Riedmiller, Andreas~K Fidjeland, Georg
+  Ostrovski, et~al.
+\newblock Human-level control through deep reinforcement learning.
+\newblock {\em Nature}, 518(7540):529, 2015.
+
+\bibitem{ha2018world}
+David Ha and J{\"u}rgen Schmidhuber.
+\newblock World models.
+\newblock {\em arXiv preprint arXiv:1803.10122}, 2018.
+
+\bibitem{kingma2013auto}
+Diederik~P Kingma and Max Welling.
+\newblock Auto-encoding variational bayes.
+\newblock {\em arXiv preprint arXiv:1312.6114}, 2013.
+
+\bibitem{watter2015embed}
+Manuel Watter, Jost Springenberg, Joschka Boedecker, and Martin Riedmiller.
+\newblock Embed to control: A locally linear latent dynamics model for control
+  from raw images.
+\newblock In {\em Advances in neural information processing systems}, pages
+  2746--2754, 2015.
+
+\bibitem{banijamali2017robust}
+Ershad Banijamali, Rui Shu, Mohammad Ghavamzadeh, Hung Bui, and Ali Ghodsi.
+\newblock Robust locally-linear controllable embedding.
+\newblock {\em arXiv preprint arXiv:1710.05373}, 2017.
+
+\bibitem{karl2016deep}
+Maximilian Karl, Maximilian Soelch, Justin Bayer, and Patrick van~der Smagt.
+\newblock Deep variational bayes filters: Unsupervised learning of state space
+  models from raw data.
+\newblock {\em arXiv preprint arXiv:1605.06432}, 2016.
+
+\bibitem{krishnan2015deep}
+Rahul~G Krishnan, Uri Shalit, and David Sontag.
+\newblock Deep kalman filters.
+\newblock {\em arXiv preprint arXiv:1511.05121}, 2015.
+
+\bibitem{karl2017unsupervised}
+Maximilian Karl, Maximilian Soelch, Philip Becker-Ehmck, Djalel Benbouzid,
+  Patrick van~der Smagt, and Justin Bayer.
+\newblock Unsupervised real-time control through variational empowerment.
+\newblock {\em arXiv preprint arXiv:1710.05101}, 2017.
+
+\bibitem{lesort2018state}
+Timoth{\'e}e Lesort, Natalia D{\'\i}az-Rodr{\'\i}guez, Jean-Fran{\c{c}}ois
+  Goudou, and David Filliat.
+\newblock State representation learning for control: An overview.
+\newblock {\em arXiv preprint arXiv:1802.04181}, 2018.
+
+\end{thebibliography}

@@ -1,0 +1,44 @@
+
+
+\documentclass[12pt, letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{natbib}
+ 
+\title{AA 273: Project Proposal}
+\author{Ramon Iglesias \thanks{rdit@stanford.edu}}
+\date{May 2018}
+ 
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+% representations in control
+A fundamental component for controlling robotic systems is the ability to succinctly \textit{represent} the system's state, how it evolves, and how it reacts to control inputs. Moreover, the chosen representation must i) be amenable to optimization, otherwise it might be of little use for control, and ii) be observable, i.e. its representation can be related to external sensors.
+Traditionally, this is done largely based on physical models of the robotic system.
+
+% DL
+Recently, the explosive development of deep learning (DL) research in the last several years has enabled tasks that were previously thought beyond grasp (e.g. highly accurate object classification \cite{krizhevsky2012imagenet}, playing Atari games \cite{mnih2015human}). Loosely speaking, a key advantage that DL provides is that of automatically finding representations for the task at hand. Naturally, researchers have looked into DL for tackling control problems, most notably under the umbrella of model-free Reinforcement Learning (RL).
+
+Some researchers, however, have noticed the opportunity of automatically learning \textit{controllable} representations from raw sensors, e.g. images, and apply traditional control methods.
+% worldmodels
+For example, \cite{ha2018world} relies on variational autoencoders \cite{kingma2013auto} to embed images into a smaller latent representation that then can be used to predict future states. This, in turn, enables the authors to control the actions of the agents in the embedded space. However, the representations were not explicitly learned with the specific purpose of control, and their proposed control methods is largely rudimentary. 
+% e2c, re2c
+In contrast, \cite{watter2015embed,banijamali2017robust} focus on finding representations from sequences of images that can be modeled by linear transitions in the latent space. After embedding the images, they control the system using iterative LQG (iLQG).
+% dvbf, empowerment, dkf
+In a similar spirit, but with a more traditional setup, \cite{karl2016deep,krishnan2015deep} treat images as observations of a dynamical system and rely on VAEs to build an approximate Bayesian filter. While they do not explicitly use these representations to control the system, a subsequent paper \cite{karl2017unsupervised} uses these methods as an alternative to traditional RL.
+% srl
+Other papers with similar approaches can be found in \cite{lesort2018state}.
+
+
+
+\section{Proposed Project}
+
+The goal of this project is to investigate the controllability of representations learned by the method proposed by \cite{karl2016deep}. The first step will be to replicate the method in a simple, cart-pole scenario. The second step will be to characterize its performance against methods with better information (known dynamics, observable states, etc.). Finally, the last step will be to attempt to improve its performance by including learning objectives that directly consider controllability.
+% proposed project
+
+\bibliographystyle{unsrt}
+\bibliography{main}
+
+\end{document}
